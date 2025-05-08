@@ -9,24 +9,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LoginUITest2 {
-	WebDriver driver;
+import com.vodafone.base.AutomationWrapper;
 
-	@BeforeMethod
-	public void setup() {
-
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.get("https://opensource-demo.orangehrmlive.com/");
-	}
-
-	@AfterMethod
-	public void teardown() {
-
-		driver.quit();
-	}
-
+public class LoginUITest2 extends AutomationWrapper {
+	
 	@Test
 	public void titleTest() {
 		String actualTitle = driver.getTitle();
