@@ -10,32 +10,25 @@ import com.vodafone.utils.DataUtils;
 
 public class LoginTest extends AutomationWrapper {
 
-	@Test
-	public void validLogin() {
-
-		LoginPage login = new LoginPage(driver);
-		login.enterUsername("Admin");
-		login.enterPassword("admin123");
-
-		login.clickOnLogin();
-
-		// Assert the text
-		DashboardPage dashboard = new DashboardPage(driver);
-		Assert.assertEquals(dashboard.getQuickLaunchText(), "Quick Launch");
-
-	}
-	// create @Dataprovider method invalidloginData()
-
-	@Test(dataProviderClass = DataUtils.class, dataProvider = "invalidloginData")
-	public void invalidoginTest(String username, String password, String expectedError) {
-		LoginPage login = new LoginPage(driver);
-		login.enterUsername(username);
-		login.enterPassword(password);
-		login.clickOnLogin();
-
-		String ActualError = login.getInvalidErrorMessage();
-		Assert.assertEquals(ActualError, expectedError);
-
-	}
+	 
+	@Test(dataProviderClass = DataUtils.class,dataProvider = "commonDataProvider")
+	 public void validLoginTest(String username,String password,String expectedValue) {
+	  LoginPage login = new LoginPage(driver);
+	  login.enterUsername(username);
+	  login.enterPassword(password);
+	  login.clickOnLogin();
+	  DashboardPage dashboard = new DashboardPage(driver);
+	  Assert.assertEquals(dashboard.getQuickLaunchText(), expectedValue);
+	 }
+	 @Test(dataProviderClass = DataUtils.class,dataProvider = "commonDataProvider")
+	 public void invalidLoginTest(String username, String password, String expectedError) {
+	  LoginPage login = new LoginPage(driver);
+	  login.enterUsername(username);
+	  login.enterPassword(password);
+	  login.clickOnLogin();
+	  String actualError = login.getInvalidErrorMessage();
+	  Assert.assertEquals(actualError, expectedError);
+	 }
+	 
 
 }

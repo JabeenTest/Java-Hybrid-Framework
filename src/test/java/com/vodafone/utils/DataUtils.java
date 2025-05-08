@@ -1,5 +1,8 @@
 package com.vodafone.utils;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
+
 import org.testng.annotations.DataProvider;
 
 //Contains all data Provider
@@ -20,5 +23,16 @@ public class DataUtils {
 	return data;
 
 	}
-
+	
+	 
+	@DataProvider
+	 public Object[][] commonDataProvider(Method mtd) throws IOException
+	 {
+	  //Sheetname is the @Test method name
+	  String testMethodName= mtd.getName();
+	  
+	  Object[][] data=ExcelUtils.getSheetIntoTwoDimensionalArray("TestExcel/Testdata.xlsx", testMethodName);
+	  return data;
+	 }
+	 
 }
