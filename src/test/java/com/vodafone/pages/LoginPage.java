@@ -3,7 +3,9 @@ package com.vodafone.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
+import com.vodafone.base.WebDriverKeywords;
+
+public class LoginPage extends WebDriverKeywords {
  private By usernameLocator = By.name("username");
  private By passwordLocator = By.name("password");
  private By loginLocator = By.xpath("//button[normalize-space()='Login']");
@@ -12,15 +14,16 @@ public class LoginPage {
  private WebDriver driver;
 
  public LoginPage(WebDriver driver) {
+	 super(driver);
   this.driver = driver;
  }
 
  public void enterUsername(String username) {
-  driver.findElement(usernameLocator).sendKeys(username);
+	 super.typeOnElement(errorLocator, username);
  }
 
  public void enterPassword(String password) {
-  driver.findElement(passwordLocator).sendKeys(password);
+  super.typeOnElement(errorLocator, password);
  }
 
  public void clickOnLogin() {
